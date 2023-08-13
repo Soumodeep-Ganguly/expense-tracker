@@ -1,0 +1,17 @@
+@keyframes slideUp {
+    from {
+        transform: translateY(100%); // Start position
+    }
+    to {
+        transform: translateY(0); // End position (center)
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%); // Start position
+    }
+    to {
+        transform: translateY(0); // End position (center)
+    }
+}

@@ -1,5 +1,7 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 const cors = require('cors');
 const api = require('./api');
 
@@ -20,6 +22,12 @@ if (process.env.NODE_ENV === 'production'){
       res.sendFile(path.join(__dirname + '/build/index.html'))
     });
 }
+
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/mern-stack', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(connection => console.log("Connected to MongoDB"));
+
 
 const PORT = process.env.PORT || 5000;
 

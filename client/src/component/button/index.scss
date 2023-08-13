@@ -1,0 +1,21 @@
+@import './../../styles/color.scss';
+
+.dev-button {
+    button {
+        border: 0px;
+        text-align: center;
+        border-radius: 20px;
+        padding: 10px 20px;
+        cursor: pointer;
+        
+        &.primary {
+            background-color: $c-primary;
+            color: $c-white;
+        }
+        
+        &.dark {
+            background-color: $c-dark;
+            color: $c-white;
+        }
+    }
+}

@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const authController = require('./../controllers/authController')
 
-// Example API route
-router.get('/example', (req, res) => {
-    res.json({ message: 'Hello from API!' });
-});
+router.post('/auth', authController.signUp);
+
+router.post('/auth/signin', authController.signIn);
 
 module.exports = router;

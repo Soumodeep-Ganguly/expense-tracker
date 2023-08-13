@@ -1,0 +1,162 @@
+@import './../../styles/color.scss';
+
+.container {
+    display: flex;
+    height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+
+    .sidenav-view {
+        transition: all 0.5s ease;
+
+        &.dark nav {
+            background-color: $c-dark;
+
+            header {
+                background-color: $c-dark;
+            }
+
+            a {
+                border-top-color: $c-primary;
+
+                &:hover,
+                &.active {
+                    background-color: $c-primary;
+                    border-left-color: $c-dark;
+                    color: $c-dark;
+                }
+            }
+        }
+
+        nav {
+            position: fixed;
+            width: 250px;
+            // display: none;
+            height: 100%;
+            background-color: $c-primary;
+            color: $c-white;
+            transition: transform 0.5s ease;
+
+            &.open {
+                // width: 250px;
+                // display: block;
+                // transition: all 0.5s ease;
+                transform: translateX(0);
+            }
+
+            &.closed {
+                transform: translateX(-250px);
+            }
+
+            header {
+                color: $c-white;
+                font-size: 28px;
+                line-height: 70px;
+                text-align: center;
+                background-color: $c-primary;
+                user-select: none;
+            }
+
+            .nav-wrapper {
+                height: 82vh;
+                overflow-y: auto;
+            }
+
+            a {
+                display: block;
+                color: $c-white;
+                height: 65px;
+                width: 100%;
+                line-height: 65px;
+                padding-left: 30px;
+                border-bottom: 1px solid $c-white;
+                border-top: 1px solid $c-dark;
+                border-left: 5px solid transparent;
+                box-sizing: border-box;
+                text-decoration: none;
+
+                &:hover,
+                &.active {
+                    background-color: $c-dark;
+                    border-left: 5px solid $c-primary;
+                    color: $c-primary;
+                }
+
+                svg {
+                    margin-right: 16px;
+                }
+
+                span {
+                    letter-spacing: 1px;
+                    text-transform: uppercase;
+                }
+            }
+
+            .nav-action {
+                position: absolute;
+                left: 15px;
+                bottom: 15px;
+                display: flex;
+
+                svg {
+                    cursor: pointer;
+                }
+
+                .sign-off {
+                    margin-left: 170px;
+                }
+            }
+        }
+    }
+
+    .sidenav-toggler {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        cursor: pointer;
+
+        &.dark .on,
+        &.dark .off {
+            background-color: $c-dark;
+            border-color: $c-dark;
+        }
+
+        .on,
+        .off {
+            background-color: $c-primary;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            color: $c-white;
+            border-radius: 5px;
+            border: 1px solid $c-primary;
+            transition: all 0.5s ease;
+        }
+
+        .off {
+            margin-left: 245px;
+        }
+    }
+
+    .content-view {
+        flex-grow: 1;
+        background-color: $c-white;
+        color: $c-dark;
+        transition: margin-left 0.5s ease; /* Add transition for margin */
+
+        &.dark {
+            background-color: rgba($c-dark, 85%);
+            color: $c-white;
+        }
+
+        h1.page-title {
+            padding-left: 60px;
+            margin-top: 8px;
+        }
+    }
+
+    .sidenav-view.open ~ .content-view {
+        margin-left: 240px; /* Same as the width of the open sidenav */
+    }
+}
