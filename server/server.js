@@ -3,7 +3,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const colors = require('colors')
 const api = require('./api');
+const { checkCategories } = require('./utils/predefinedCategories')
 
 const app = express();
 
@@ -26,11 +28,13 @@ if (process.env.NODE_ENV === 'production'){
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/expense-tracker', {
   useNewUrlParser: true,
   useUnifiedTopology: true
-}).then(connection => console.log("Connected to MongoDB"));
-
+}).then(async (connection) => {
+  console.log("Connected to", colors.blue(`MongoDB`))
+  await checkCategories()
+});
 
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    console.log(`Server running on port`, colors.blue(`${PORT}`));
 });

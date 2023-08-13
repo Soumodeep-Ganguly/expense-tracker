@@ -19,7 +19,14 @@ const Routes = [
     title: 'Expenses | MERN Dev'
   },
   {
-    path: '/expenses/:id',
+    path: '/expenses/add',
+    view: <AddExpenses />,
+    layout: 'auth',
+    permission: "user",
+    title: 'Expenses | MERN Dev'
+  },
+  {
+    path: '/expenses/edit/:id',
     view: <AddExpenses />,
     layout: 'auth',
     permission: "user",
