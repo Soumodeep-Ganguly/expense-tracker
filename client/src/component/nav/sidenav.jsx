@@ -34,17 +34,17 @@ export default function SideNav(props) {
                 <nav className={`${open ? "open" : "closed"}`}>
                     <header>MERN Dev</header>
                     <div className='nav-wrapper'>
-                        <Link to='/' className='active'>
+                        <Link to='/' className={window.location.pathname === "/" ? 'active' : ""}>
                             <UilCreateDashboard />
                             <span className="nav-text">Dashboard</span>
                         </Link>
-                        <Link to='/'>
+                        <Link to='/expenses' className={window.location.pathname.includes("/expenses") ? 'active' : ""}>
                             <UilInfoCircle />
-                            <span>About</span>
+                            <span>Expenses</span>
                         </Link>
-                        <Link to='/'>
+                        <Link to='/settings' className={window.location.pathname === "/settings" ? 'active' : ""}>
                             <UilAt />
-                            <span>Contact</span>
+                            <span>Settings</span>
                         </Link>
                     </div>
                     <div className='nav-action'>

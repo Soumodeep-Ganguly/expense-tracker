@@ -14,7 +14,7 @@ module.exports.signUp = async (req, res) => {
         const user = new User({ name, email, password: hashedPassword });
         await user.save();
         
-        const token = jwt.sign({ userId: user._id, userEmail: user.email }, process.env.JWT_TOKEN_SECRET, { expiresIn: '72h' });
+        const token = jwt.sign({ userId: user._id, userEmail: user.email }, process.env.JWT_TOKEN_SECRET || "expense-tracker", { expiresIn: '72h' });
         res.json({ token, name: user.name });
     } catch (error) {
         res.status(500).json({ error: 'Error signing up user' });
@@ -30,7 +30,7 @@ module.exports.signIn = async (req, res) => {
         const isValidPassword = await bcrypt.compare(password, user.password);
         if (!isValidPassword) return res.status(401).json({ error: 'Invalid credentials' });
         
-        const token = jwt.sign({ userId: user._id, userEmail: user.email }, process.env.JWT_TOKEN_SECRET, { expiresIn: '72h' });
+        const token = jwt.sign({ userId: user._id, userEmail: user.email }, process.env.JWT_TOKEN_SECRET || "expense-tracker", { expiresIn: '72h' });
         res.json({ token, name: user.name });
     } catch (error) {
         res.status(500).json({ error: 'Error logging in' });

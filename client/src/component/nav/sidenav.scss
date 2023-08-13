@@ -14,10 +14,12 @@
 
             header {
                 background-color: $c-dark;
+                color: $c-white;
             }
 
             a {
                 border-top-color: $c-primary;
+                color: $c-white;
 
                 &:hover,
                 &.active {
@@ -25,6 +27,10 @@
                     border-left-color: $c-dark;
                     color: $c-dark;
                 }
+            }
+
+            .nav-action {
+                color: $c-white;
             }
         }
 
@@ -34,7 +40,7 @@
             // display: none;
             height: 100%;
             background-color: $c-primary;
-            color: $c-white;
+            color: $c-dark;
             transition: transform 0.5s ease;
 
             &.open {
@@ -49,7 +55,7 @@
             }
 
             header {
-                color: $c-white;
+                color: $c-dark;
                 font-size: 28px;
                 line-height: 70px;
                 text-align: center;
@@ -64,7 +70,7 @@
 
             a {
                 display: block;
-                color: $c-white;
+                color: $c-dark;
                 height: 65px;
                 width: 100%;
                 line-height: 65px;
@@ -97,6 +103,7 @@
                 left: 15px;
                 bottom: 15px;
                 display: flex;
+                color: $c-dark;
 
                 svg {
                     cursor: pointer;
@@ -119,6 +126,7 @@
         &.dark .off {
             background-color: $c-dark;
             border-color: $c-dark;
+            color: $c-white;
         }
 
         .on,
@@ -128,7 +136,7 @@
             height: 30px;
             text-align: center;
             line-height: 30px;
-            color: $c-white;
+            color: $c-dark;
             border-radius: 5px;
             border: 1px solid $c-primary;
             transition: all 0.5s ease;

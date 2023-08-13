@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === 'production'){
     });
 }
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/mern-stack', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/expense-tracker', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(connection => console.log("Connected to MongoDB"));
