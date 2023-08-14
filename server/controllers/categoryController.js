@@ -12,10 +12,15 @@ module.exports.get = async (req, res) => {
 
 module.exports.getAll = async (req, res) => {
     try {
-        const categories = await Category.find({ $or: [
-            { user: req.user.userId, deleted: false },
-            { user: null }
-        ] });
+        let where = { 
+            $or: [
+                { user: req.user.userId, deleted: false },
+                { user: null }
+            ] 
+        }
+        if(req.query.q) where['name'] = { $regex: new RegExp(req.query.q, 'i') }
+
+        const categories = await Category.find(where).limit(10);
 
         res.send({ categories });
     } catch (error) {

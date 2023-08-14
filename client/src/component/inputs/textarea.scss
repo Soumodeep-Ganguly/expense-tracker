@@ -1,0 +1,53 @@
+@import './../../styles/color.scss';
+
+.text-input {
+    position: relative;
+
+    label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: 0.3s ease-in-out;
+        transform-origin: top left;
+        color: $c-dark;
+
+        &.primary,
+        &.dark {
+            color: $c-white;
+        }
+    }
+    
+    textarea {
+        border: none;
+        outline: none;
+        resize: none;
+        border-bottom: 2px solid $c-dark;
+        padding: 5px 0;
+        position: relative;
+        background-color: transparent;
+        color: $c-white;
+
+        &::placeholder {
+            color: $c-dark;
+        }
+
+        &.primary::placeholder,
+        &.dark::placeholder {
+            color: $c-white;
+        }
+
+        &.primary {
+            border-bottom: 2px solid $c-white;
+        }
+
+        &.dark {
+            border-bottom: 2px solid $c-white;
+        }
+    }
+
+    &.focused {
+        label {
+            transform: translateY(-100%) scale(0.8);
+        }
+    }
+}

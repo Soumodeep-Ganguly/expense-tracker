@@ -43,7 +43,7 @@
         .modal-content {
             padding: 0 20px;
 
-            input {
+            input, textarea {
                 color: $c-dark;
             }
         
@@ -71,7 +71,7 @@
                     color: $c-white;
                 }
 
-                input {
+                input, textarea {
                     border-bottom-color: $c-white;
                     color: $c-white;
                 }
