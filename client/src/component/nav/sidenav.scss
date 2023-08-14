@@ -69,7 +69,7 @@
             }
 
             a {
-                display: block;
+                display: flex;
                 color: $c-dark;
                 height: 65px;
                 width: 100%;
@@ -124,21 +124,21 @@
 
         &.dark .on,
         &.dark .off {
-            background-color: $c-dark;
-            border-color: $c-dark;
-            color: $c-white;
+            background-color: $c-primary;
+            border-color: $c-primary;
+            color: $c-dark;
         }
 
         .on,
         .off {
-            background-color: $c-primary;
+            background-color: $c-dark;
             width: 30px;
             height: 30px;
             text-align: center;
             line-height: 30px;
-            color: $c-dark;
+            color: $c-white;
             border-radius: 5px;
-            border: 1px solid $c-primary;
+            border: 1px solid $c-dark;
             transition: all 0.5s ease;
         }
 

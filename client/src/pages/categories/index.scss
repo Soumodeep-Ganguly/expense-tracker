@@ -1,0 +1,47 @@
+@import './../../styles/color.scss';
+
+.category-container {
+    .createBtn {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        background-color: $c-dark;
+        color: $c-white;
+    }
+
+    .item-container {
+        padding: 0 15px;
+        .item {
+            display: flex;
+            border-radius: 5px;
+            border: 1px solid $c-dark;
+            padding: 5px 8px;
+            margin-bottom: 5px;
+
+            svg {
+                cursor: pointer;
+            }
+        }
+        
+        // Grid layout for larger screens
+        @media screen and (min-width: 768px) {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+    }
+
+}
+
+.dark .category-container {
+    .createBtn {
+        background-color: $c-primary;
+        color: $c-dark;
+    }
+
+    .item-container {
+        .item {
+            border-color: $c-white;
+        }
+    }
+}

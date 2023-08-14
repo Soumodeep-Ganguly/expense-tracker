@@ -11,6 +11,7 @@ export default function SignUp() {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [loading, setLoading] = useState(false)
     const authContext = useContext(AuthContext)
 
     useEffect(() => {
@@ -22,10 +23,13 @@ export default function SignUp() {
         if(email.trim() === "") return Toast.fire({ icon: 'error', title: "Email required" })
         if(password === "") return Toast.fire({ icon: 'error', title: "Password required" })
 
+        setLoading(true)
         try {
             let res = await axios.post('/api/auth', { name, email, password })
             authContext.signin(res)
+            setLoading(false)
         } catch (error) {
+            setLoading(false)
             Toast.fire({ icon: 'error', title: error?.response?.data?.error || "Unable to Sign-Up" })
         }
     }
@@ -60,6 +64,7 @@ export default function SignUp() {
                 <Button 
                     variant="primary"
                     text="Create"
+                    loading={loading}
                     onClick={() => signUpUser()}
                     style={{ marginTop: 30, marginBottom: 90 }}
                 />

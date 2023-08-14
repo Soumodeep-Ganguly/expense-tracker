@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { UilTimes, UilBars, UilSun, UilMoon, UilSignOutAlt, UilCreateDashboard, UilInfoCircle, UilAt } from '@iconscout/react-unicons'
+import { UilTimes, UilListUl, UilBars, UilSun, UilMoon, UilSignOutAlt, UilCreateDashboard, UilDollarAlt, UilSetting } from '@iconscout/react-unicons'
 import { AuthContext } from '../../app/auth'
 import { Link } from 'react-router-dom'
 import './sidenav.scss'
@@ -35,15 +35,19 @@ export default function SideNav(props) {
                     <header>MERN Dev</header>
                     <div className='nav-wrapper'>
                         <Link to='/' className={window.location.pathname === "/" ? 'active' : ""}>
-                            <UilCreateDashboard />
+                            <UilCreateDashboard style={{ marginTop: 20 }} />
                             <span className="nav-text">Dashboard</span>
                         </Link>
+                        <Link to='/categories' className={window.location.pathname.includes("/categories") ? 'active' : ""}>
+                            <UilListUl style={{ marginTop: 20 }} />
+                            <span>Categories</span>
+                        </Link>
                         <Link to='/expenses' className={window.location.pathname.includes("/expenses") ? 'active' : ""}>
-                            <UilInfoCircle />
+                            <UilDollarAlt style={{ marginTop: 20 }} />
                             <span>Expenses</span>
                         </Link>
                         <Link to='/settings' className={window.location.pathname === "/settings" ? 'active' : ""}>
-                            <UilAt />
+                            <UilSetting style={{ marginTop: 20 }} />
                             <span>Settings</span>
                         </Link>
                     </div>

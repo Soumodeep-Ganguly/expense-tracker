@@ -1,6 +1,6 @@
+import Categories from "../pages/categories";
 import Dashboard from "../pages/dashboard/dashboard";
 import Expenses from "../pages/expenses";
-import AddExpenses from "../pages/expenses/add";
 import Settings from "../pages/settings";
 
 const Routes = [
@@ -19,15 +19,8 @@ const Routes = [
     title: 'Expenses | MERN Dev'
   },
   {
-    path: '/expenses/add',
-    view: <AddExpenses />,
-    layout: 'auth',
-    permission: "user",
-    title: 'Expenses | MERN Dev'
-  },
-  {
-    path: '/expenses/edit/:id',
-    view: <AddExpenses />,
+    path: '/categories',
+    view: <Categories />,
     layout: 'auth',
     permission: "user",
     title: 'Expenses | MERN Dev'

@@ -11,7 +11,7 @@ export default function Text(props) {
     };
 
     return (
-        <div className={`text-input ${isFocused ? 'focused' : ''}`} style={props.style}>
+        <div className={`text-input ${isFocused || props.value ? 'focused' : ''}`} style={props.style}>
             {props.label && <label className={`${props.variant}`}>{props.label}</label>}
             <input 
                 type={props.type || "text"}
