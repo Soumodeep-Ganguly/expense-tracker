@@ -119,7 +119,7 @@ const CategoryModal = (props) => {
         </div>
         <div>
             <Button 
-                text="Create"
+                text={props.selected?"Save":"Create"}
                 className="save"
                 loading={loading}
                 onClick={() => onSave()}
