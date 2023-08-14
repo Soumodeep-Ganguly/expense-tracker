@@ -138,6 +138,13 @@ const ExpenseModal = (props) => {
         props.fetchCategories(newValue);
     };
 
+    const formatDate = (date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
+
     return <Modal isOpen={props.isOpen || props.selected} onClose={props.onClose} title={`${props.selected?"Edit":"Add"} Expense`}>
         <div>
             <TextArea 
@@ -165,7 +172,7 @@ const ExpenseModal = (props) => {
             <Text
                 label="Date"
                 type="date"
-                value={date}
+                value={formatDate(date)}
                 onChange={setDate}
                 style={{ marginTop: 30 }}
             />
