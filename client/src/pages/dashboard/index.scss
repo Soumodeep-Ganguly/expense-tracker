@@ -1,0 +1,66 @@
+@import './../../styles/color.scss';
+
+.dashboard-container {
+    height: 100vh;
+    overflow-y: auto;
+    margin: 0 15px;
+    
+    .data-container {
+
+        .chart-view {
+            width: 90%;
+
+            @media screen and (min-width: 768px) {
+                width: 80%;
+            }
+        }
+
+        @media screen and (min-width: 768px) {
+            display: flex;
+        }
+
+        .amount-view {
+            margin-top: 10px;
+
+            & > div {
+                border: 1px solid $c-dark;
+                border-radius: 10px;
+                padding: 10px;
+                text-align: center;
+                margin-bottom: 20px;
+
+                h4 {
+                    font-size: 18px;
+                }
+
+                h2 {
+                    font-size: 36px;
+                    line-height: 36px;
+                }
+
+                small {
+                    line-height: 10px;
+                }
+                
+                @media screen and (min-width: 768px) {
+                    margin-left: 20px;
+                    width: 150px;
+                }
+            }
+
+            @media screen and (max-width: 768px) {
+                margin-top: 20px;
+            }
+        }
+    }
+}
+
+.dark .dashboard-container {
+    color: $c-white;
+
+    .amount-view {
+        & > div {
+            border-color: $c-white;
+        }
+    }
+}
