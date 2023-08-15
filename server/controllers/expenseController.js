@@ -36,6 +36,8 @@ module.exports.analysisChart = async (req, res) => {
         let labels = []
         let prevLabel = ""
         let thisLabel = ""
+        let prevTotal = 0
+        let thisTotal = 0
 
         // {
         //     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
@@ -172,7 +174,8 @@ module.exports.analysisChart = async (req, res) => {
             labels = Array.from({ length: totalDays }, (_, i) => i + 1);
         }
 
-        // console.log("ARR ", prevData, thisData)
+        prevTotal = prevData.reduce((sum, amount) => sum + amount, 0);
+        thisTotal = thisData.reduce((sum, amount) => sum + amount, 0);
 
         res.send({
             chart: {
@@ -194,11 +197,11 @@ module.exports.analysisChart = async (req, res) => {
             },
             prevData: {
                 label: prevLabel,
-                value: 0
+                value: prevTotal
             },
             thisData: {
                 label: thisLabel,
-                value: 0
+                value: thisTotal
             }
         });
     } catch(err) {

@@ -1,0 +1,102 @@
+@import './../../styles/color.scss';
+
+.setting-container {
+    margin: 0 20px;
+
+    .user-form {
+        margin-top: 40px;
+    }
+
+    input {
+        color: $c-dark;
+        @media screen and (min-width: 768px) {
+            width: 200px;
+        }
+    }
+
+    button {
+        background-color: $c-dark;
+        color: $c-white;
+        @media screen and (min-width: 768px) {
+            width: 200px;
+        }
+    }
+
+    .csLabel {
+        margin-top: 15px;
+        font-size: 14px;
+    }
+    .text-switch {
+        display: flex;
+        margin-top: 5px;
+        
+        & > div {
+            cursor: pointer;
+            font-size: 14px;
+
+            &.off {
+                border-top-left-radius: 10px;
+                border-bottom-left-radius: 10px;
+                padding: 5px 10px;
+                border-top: 1px solid $c-dark;
+                border-bottom: 1px solid $c-dark;
+                border-left: 1px solid $c-dark;
+            }
+        
+            &.on {
+                border-top-right-radius: 10px;
+                border-bottom-right-radius: 10px;
+                padding: 5px 10px;
+                border-top: 1px solid $c-dark;
+                border-right: 1px solid $c-dark;
+                border-bottom: 1px solid $c-dark;
+            }
+
+            &.active {
+                background-color: $c-dark;
+                color: $c-primary;
+            }
+        }
+    }
+
+    @media screen and (min-width: 768px) {
+        width: 400px;
+    }
+}
+
+.dark .setting-container {
+    color: $c-white;
+
+    input, label {
+        color: $c-white;
+    }
+    input {
+        border-bottom-color: $c-white;
+    }
+
+    button {
+        background-color: $c-primary;
+        color: $c-dark;
+    }
+
+    .text-switch {        
+        & > div {
+            &.off {
+                border-top: 1px solid $c-white;
+                border-bottom: 1px solid $c-white;
+                border-left: 1px solid $c-white;
+            }
+        
+            &.on {
+                border-top: 1px solid $c-white;
+                border-right: 1px solid $c-white;
+                border-bottom: 1px solid $c-white;
+            }
+
+            &.active {
+                background-color: $c-primary;
+                color: $c-dark;
+            }
+        }
+    }
+}

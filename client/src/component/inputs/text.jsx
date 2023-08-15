@@ -18,6 +18,7 @@ export default function Text(props) {
                 placeholder={!props.label && props.placeholder}
                 value={props.value}
                 className={`${props.variant}`}
+                disable={props.disable}
                 onChange={(e) => props.onChange(e.target.value)}
                 style={{ width: props.width || "100%" }}
                 onFocus={handleFocus}

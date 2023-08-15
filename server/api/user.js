@@ -5,4 +5,6 @@ const { authenticateToken } = require('./../utils/auth')
 
 router.get('/user', authenticateToken, userController.get);
 
+router.put('/user', authenticateToken, userController.update);
+
 module.exports = router;
