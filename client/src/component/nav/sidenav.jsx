@@ -32,7 +32,7 @@ export default function SideNav(props) {
         <div className='container'>
             <div className={`sidenav-view ${open ? 'open' : ''} ${dark ? 'dark' : ''}`}>
                 <nav className={`${open ? "open" : "closed"}`}>
-                    <header>MERN Dev</header>
+                    <header>Expense Tracker</header>
                     <div className='nav-wrapper'>
                         <Link to='/' className={window.location.pathname === "/" ? 'active' : ""}>
                             <UilCreateDashboard style={{ marginTop: 20 }} />
