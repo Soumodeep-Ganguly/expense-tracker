@@ -9,14 +9,26 @@
         color: $c-white;
     }
 
+    .filter-section {
+        display: flex;
+        margin: 15px;
+
+        input {
+            color: $c-dark;
+        }
+    }
+
     .item-container {
         padding: 0 15px;
         .item {
-            display: flex;
             border-radius: 5px;
             border: 1px solid $c-dark;
             padding: 5px 8px;
             margin-bottom: 5px;
+
+            div {
+                display: flex;
+            }
 
             svg {
                 cursor: pointer;
@@ -26,7 +38,7 @@
         // Grid layout for larger screens
         @media screen and (min-width: 768px) {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 10px;
         }
     }
@@ -56,12 +68,12 @@
                 box-shadow: none;
             }
 
-            &:last-of-type {
-                & > div > div:hover {
-                    background-color: $c-dark;
-                    color: $c-white;
-                }
-            }
+            // &:last-of-type {
+            //     & > div > div:hover {
+            //         background-color: $c-dark;
+            //         color: $c-white;
+            //     }
+            // }
         }
     }
 
@@ -71,6 +83,12 @@
     .createBtn {
         background-color: $c-primary;
         color: $c-dark;
+    }
+
+    .filter-section { 
+        input, label {
+            color: $c-white;
+        }
     }
 
     .item-container {
@@ -96,12 +114,12 @@
                 border: none;
             }
 
-            &:last-child {
-                & > div > div:hover {
-                    background-color: $c-primary;
-                    color: $c-dark;
-                }
-            }
+            // &:last-child {
+            //     & > div > div:hover {
+            //         background-color: $c-primary;
+            //         color: $c-dark;
+            //     }
+            // }
         }
     }
 }

@@ -8,6 +8,7 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import { UilTimes, UilPen } from '@iconscout/react-unicons'
 import TextArea from '../../component/inputs/textarea';
+import { DateTime } from 'luxon'
 import './index.scss'
 
 export default function Expenses() {
@@ -15,11 +16,22 @@ export default function Expenses() {
     const [expenses, setExpenses] = useState([]);
     const [selectedExpense, setSelectedExpense] = useState(null);
     const [categories, setCategories] = useState([]);
+    const [searchCategory, setSearchCategory] = useState('');
+    const [search, setSearch] = useState("");
+    const [category, setCategory] = useState(null);
+
+    useEffect(() => {
+        loadOptions('')
+    }, [])
 
     useEffect(() => {
         fetchExpenses()
-        loadOptions('')
-    }, [])
+    }, [category, search])
+
+    const handleInputChange = (newValue) => {
+        setSearchCategory(newValue);
+        loadOptions(newValue);
+    };
 
     const loadOptions = async (inputValue) => {
         try {
@@ -32,7 +44,10 @@ export default function Expenses() {
 
     const fetchExpenses = async () => {
         try {
-            let res = await axios.get('/api/expenses')
+            let uri = `/api/expenses?q=${search}`
+            if(category) uri += `&category=${category?._id}`
+
+            let res = await axios.get(uri)
             setExpenses(res.data.expenses)
         } catch(err) {
 
@@ -71,12 +86,51 @@ export default function Expenses() {
                     width={100}
                 />
             </div>
+            <div className='filter-section'>
+                <div style={{ width: 150 }}>
+                    <Select
+                        options={categories}
+                        onInputChange={handleInputChange}
+                        getOptionValue={(option) => option._id}
+                        getOptionLabel={(option) => option.name} 
+                        placeholder="Category" 
+                        className="my-select"
+                        isClearable
+                        styles={{
+                            option: (styles, { isFocused, isSelected }) => {
+                                return {
+                                    ...styles,
+                                    backgroundColor: isSelected ? "#FFD60A" : isFocused ? "#FFD60A" : undefined,
+                                    color: isSelected ? "#000814" : isFocused ? "#000814" : undefined,
+                                };
+                            },
+                        }}
+                        value={category}
+                        onChange={(value) => setCategory(value)}
+                    />
+                </div>
+                <div style={{ marginLeft: 'auto' }}>
+                    <Text
+                        label="Search"
+                        value={search}
+                        onChange={setSearch}
+                        style={{ marginTop: 13 }}
+                    />
+                </div>
+            </div>
             <div className='item-container'>
                 {expenses?.map(expense => (
                     <div key={expense._id} className='item'>
-                        {expense.description}
-                        <UilPen size={16} style={{ marginTop: 3, marginLeft: 'auto' }} onClick={() => setSelectedExpense(expense)} />
-                        <UilTimes size={20} style={{ marginTop: 1, marginLeft: 3 }} onClick={() => deleteExpense(expense._id)} />
+                        <div>
+                            Spent &nbsp;<b>Rs.{expense.amount}</b>&nbsp; on &nbsp;<b>{expense.category?.name}</b>
+                            <UilPen size={16} style={{ marginTop: 3, marginLeft: 'auto' }} onClick={() => setSelectedExpense(expense)} />
+                            <UilTimes size={20} style={{ marginTop: 1, marginLeft: 3 }} onClick={() => deleteExpense(expense._id)} />
+                        </div>
+                        <div style={{ marginTop: 5 }}>
+                            <small>{expense.description}</small>
+                            <small style={{ marginLeft: 'auto' }}>{DateTime.fromISO(expense.date).toFormat("dd LLL yyyy")}</small>
+                        </div>
+
                     </div>
                 ))}
             </div>
@@ -160,20 +214,32 @@ const ExpenseModal = (props) => {
                 getOptionLabel={(option) => option.name} 
                 placeholder="Select a Category" 
                 className="my-select"
+                isClearable
+                styles={{
+                    option: (styles, { isFocused, isSelected }) => {
+                        return {
+                            ...styles,
+                            backgroundColor: isSelected ? "#FFD60A" : isFocused ? "#FFD60A" : undefined,
+                            color: isSelected ? "#000814" : isFocused ? "#000814" : undefined,
+                        };
+                    },
+                }}
                 value={category}
                 onChange={(value) => setCategory(value)}
             />
             <Text
-                label="Amount"
+                label="Amount (Rs.)"
                 value={amount}
-                onChange={setAmount}
+                onChange={(value) => {
+                    if(/^\d*\.?\d*$/.test(value)) setAmount(value)
+                }}
                 style={{ marginTop: 30 }}
             />
             <Text
                 label="Date"
                 type="date"
                 value={formatDate(date)}
-                onChange={setDate}
+                onChange={(value) => setDate(new Date(value))}
                 style={{ marginTop: 30 }}
             />
         </div>

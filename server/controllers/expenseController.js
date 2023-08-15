@@ -2,7 +2,18 @@ const Expense = require('../models/expense');
 
 module.exports.get = async (req, res) => {
     try {
-        const expenses = await Expense.find({ user: req.user.userId }).populate("category");
+        let limit = 10
+        let skip = 0
+        let where = { user: req.user.userId }
+        if(req.query.q) where['description'] = { $regex: new RegExp(req.query.q, 'i') }
+        if(req.query.category) where['category'] = req.query.category
+        if(req.query.page) skip = Number(req.query.page) * limit
+
+        const expenses = await Expense.find(where)
+                                .populate("category")
+                                .sort({ date: -1 })
+                                .skip(skip)
+                                .limit(limit)
 
         res.send({ expenses });
     } catch (error) {
