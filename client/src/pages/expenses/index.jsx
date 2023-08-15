@@ -6,7 +6,7 @@ import Button from '../../component/button'
 import Toast from '../../component/toast'
 import axios from 'axios'
 import Swal from 'sweetalert2'
-import { UilTimes, UilPen } from '@iconscout/react-unicons'
+import { UilTimes, UilPen, UilAngleLeft, UilAngleRight } from '@iconscout/react-unicons'
 import TextArea from '../../component/inputs/textarea';
 import { DateTime } from 'luxon'
 import './index.scss'
@@ -19,6 +19,8 @@ export default function Expenses() {
     const [searchCategory, setSearchCategory] = useState('');
     const [search, setSearch] = useState("");
     const [category, setCategory] = useState(null);
+    const [page, setPage] = useState(0);
+    const [totalPage, setTotalPage] = useState(0);
 
     useEffect(() => {
         loadOptions('')
@@ -26,7 +28,7 @@ export default function Expenses() {
 
     useEffect(() => {
         fetchExpenses()
-    }, [category, search])
+    }, [category, search, page])
 
     const handleInputChange = (newValue) => {
         setSearchCategory(newValue);
@@ -44,11 +46,12 @@ export default function Expenses() {
 
     const fetchExpenses = async () => {
         try {
-            let uri = `/api/expenses?q=${search}`
+            let uri = `/api/expenses?q=${search}&page=${page}`
             if(category) uri += `&category=${category?._id}`
 
             let res = await axios.get(uri)
             setExpenses(res.data.expenses)
+            setTotalPage(res.data.pages - 1)
         } catch(err) {
 
         }
@@ -133,6 +136,18 @@ export default function Expenses() {
 
                     </div>
                 ))}
+            </div>
+            <div className='pagination'>
+                <div className={`prev ${page === 0 && "disable"}`} onClick={() => {
+                    if(page !== 0) setPage(page - 1)
+                }}>
+                    <UilAngleLeft />
+                </div>
+                <div className={`next ${page === totalPage && "disable"}`} onClick={() => {
+                    if(page < totalPage) setPage(page + 1)
+                }}>
+                    <UilAngleRight />
+                </div>
             </div>
             {(isModalOpen || selectedExpense) && <ExpenseModal 
                 isOpen={isModalOpen}

@@ -13,9 +13,11 @@ module.exports.get = async (req, res) => {
                                 .populate("category")
                                 .sort({ date: -1 })
                                 .skip(skip)
-                                .limit(limit)
+                                .limit(limit);
 
-        res.send({ expenses });
+        const count = await Expense.countDocuments(where)
+
+        res.send({ expenses, pages: Math.ceil(count/limit) });
     } catch (error) {
         res.status(500).json({ error: 'Error getting expenses' });
     }
